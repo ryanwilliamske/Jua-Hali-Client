@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import Navbar from './components/nav/Navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
@@ -17,11 +19,14 @@ function App() {
   
     return (
       <div className="App">
+          <Navbar  />
         <ReactMapGL {...viewport} 
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        mapStyle="mapbox://styles/ryanwilliamske/ckeod2oiz44ed19ocgqay41f0"
         onViewportChange={viewport => {
             setViewport(viewport)
-        }}> Map goes here</ReactMapGL>
+        }}> 
+        </ReactMapGL>
        
       </div>
     );
