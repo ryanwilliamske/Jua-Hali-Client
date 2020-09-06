@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-/testdata
+/src/testdata
 /testicons
 
 

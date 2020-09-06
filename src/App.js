@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import Navbar from './components/nav/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import * as HomeData from "./testdata/features.json";
 
 
 function App() {
@@ -21,11 +21,25 @@ function App() {
       <div className="App">
           <Navbar  />
         <ReactMapGL {...viewport} 
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_PUBLIC_TOKEN}
         mapStyle="mapbox://styles/ryanwilliamske/ckeod2oiz44ed19ocgqay41f0"
         onViewportChange={viewport => {
             setViewport(viewport)
         }}> 
+
+        { HomeData.features.map((home) => (
+          // console.log('Lat is..' + home.geometry.coordinates[1])
+          <Marker key={home.id} 
+              latitude={home.geometry.coordinates[1]} 
+              longitude={home.geometry.coordinates[0]}>
+
+            <button>
+              <img src="/home.svg" alt="Homes"/>
+            </button>
+
+          </Marker>
+        )) }
+        
         </ReactMapGL>
        
       </div>
