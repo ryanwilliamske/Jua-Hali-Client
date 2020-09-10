@@ -3,46 +3,47 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import Navbar from './components/nav/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as HomeData from "./testdata/features.json";
+import TheMap from './components/map/TheMap'
+import Tabs from "./components/Tabs"
+import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Disaster from './components/Disaster';
+
+
+import Fab from './components/Fab';
+
 
 
 function App() {
-    const [viewport, setViewport] = useState(
-        {
-            latitude: -1.284,
-            longitude: 36.816,
-            width: '100vw',
-            height: '100vh',
-            zoom: 10
-        }
-    );
 
+    // const [viewport, setViewport] = useState(
+    //     {
+    //         latitude: -1.284,
+    //         longitude: 36.816,
+    //         width: '100vw',
+    //         height: '100vh',
+    //         zoom: 10
+    //     }
+    // );
   
     return (
-      <div className="App">
+      <Router>
+        <Route />
+        <div className="container">
           <Navbar  />
-        <ReactMapGL {...viewport} 
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_PUBLIC_TOKEN}
-        mapStyle="mapbox://styles/ryanwilliamske/ckeod2oiz44ed19ocgqay41f0"
-        onViewportChange={viewport => {
-            setViewport(viewport)
-        }}> 
-
-        { HomeData.features.map((home) => (
-          // console.log('Lat is..' + home.geometry.coordinates[1])
-          <Marker key={home.id} 
-              latitude={home.geometry.coordinates[1]} 
-              longitude={home.geometry.coordinates[0]}>
-
-            <button>
-              <img src="/home.svg" alt="Homes"/>
-            </button>
-
-          </Marker>
-        )) }
-        
-        </ReactMapGL>
-       
-      </div>
+          <Tabs>
+            <div label="Map">
+              Map will be here.
+              <TheMap />
+            </div>
+            <div label="List">
+              <Disaster />
+            </div>
+          </Tabs>
+          {/* <TheMap /> */}
+          <Fab />
+        </div>
+      </Router>
     );
   }
 
