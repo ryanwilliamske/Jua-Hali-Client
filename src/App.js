@@ -8,6 +8,8 @@ import Tabs from "./components/Tabs"
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Disaster from './components/Disaster';
+import { trackPromise } from 'react-promise-tracker';
+// import  EditDisaster from './components/crud/EditDisaster'; 
 
 
 import Fab from './components/Fab';
@@ -29,18 +31,20 @@ function App() {
     return (
       <Router>
         <Route />
-        <div className="container">
+        <div>
           <Navbar  />
           <Tabs>
-            <div label="Map">
-              Map will be here.
-              <TheMap />
-            </div>
-            <div label="List">
+          <div label="List">
               <Disaster />
+              {/* <Route path="/update/:id" component={EditDisaster} /> */}
+          </div>
+          <div label="Map">
+              <div className="the-map">
+                    <TheMap />
+              </div>
             </div>
           </Tabs>
-          {/* <TheMap /> */}
+
           <Fab />
         </div>
       </Router>

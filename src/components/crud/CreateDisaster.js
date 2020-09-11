@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import { Modal , Button , Row , Column } from 'react-bootstrap';
 import "react-datepicker/dist/react-datepicker.css";
+import axios from 'axios';
 
 export default class CreateDisaster extends Component {
     constructor(props){
@@ -20,7 +21,7 @@ export default class CreateDisaster extends Component {
             location: '',
             description:'',
             dateDiscovered: new Date(),
-            responseStatus: '',
+            responseStatus: 'Not resolved',
 
             disasters: []
         }
@@ -66,7 +67,17 @@ export default class CreateDisaster extends Component {
             responseStatus: this.state.responseStatus,
         }
         console.log(disaster);
-        window.location = '/';
+        axios.post('http://localhost:5000/disasters/add', disaster)
+            .then(res => console.log(res.data));
+        window.location = '/disasters/add';
+
+        this.state = {
+            disasterName: '',
+            location: '',
+            description:'',
+            dateDiscovered: new Date(),
+            responseStatus: 'Not resolved',
+        }
     }
 
     render() {
@@ -74,10 +85,46 @@ export default class CreateDisaster extends Component {
             <div>
                 <h1>Add new disaster</h1>
                 <form onSubmit={this.onSubmit}>
+                <div className="form-group"> 
+                        <label>Disaster: </label>
+                        <input  type="text"
+                        required
+                        className="form-control"
+                        value={this.state.disasterName}
+                        onChange={this.onChangeDisasterName}
+                        />
+                    </div>
+                    <div className="form-group"> 
+                        <label>Description: </label>
+                        <input type="text-area"
+                        required
+                        className="form-control"
+                        value={this.state.description}
+                        onChange={this.onChangeDescription}
+                        />
+                    </div>
+                    <div className="form-group"> 
+                        <label>Location: </label>
+                        <input  type="text"
+                        required
+                        className="form-control"
+                        value={this.state.location}
+                        onChange={this.onChangelocation}
+                        />
+                    </div>
+
                     <div className="form-group">
+                    <label>Date: </label>
+                    <div>
+                    <DatePicker
+                    selected={this.state.dateDiscovered}
+                    onChange={this.onChangeDateDiscovered}
+                    />
+                    </div>
+                    </div>
 
-                        <DatePicker />
-
+                    <div className="form-group">
+                    <input type="submit" value="Publish" className="btn btn-primary" />
                     </div>
                 </form>
             </div>

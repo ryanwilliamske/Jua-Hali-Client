@@ -19,12 +19,13 @@ import { Link } from 'react-router-dom';
 export default class Navbar extends Component {
     render() {
         return (
-        <nav className="navbar navbar-light bg-light justify-content-between">
+        <nav className="navbar navbar-dark bg-dark justify-content-between">
             <Link to="/" className="navbar-brand">Jua Hali</Link>
             {/* <form className="form-inline">
                 <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
                 <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form> */}
+            
         </nav>
         )
     }
